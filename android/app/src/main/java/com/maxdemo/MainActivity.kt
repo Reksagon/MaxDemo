@@ -1,4 +1,4 @@
-package com.maxdemo
+package com.applovin.enterprise.apps.demoapp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

@@ -1,4 +1,4 @@
-package com.maxdemo
+package com.applovin.enterprise.apps.demoapp
 
 import android.app.Application
 import com.facebook.react.PackageList

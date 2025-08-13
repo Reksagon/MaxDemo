@@ -5,10 +5,10 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, View, Text, Button, StyleSheet, Platform} from 'react-native';
 
 
-const SDK_KEY = 'TxhDiMQVbncc9h4M1QzqCMODZz7gMzTwuF8bbT6CKipTPuqQJoFV8dihbrNzpxthA0ImTOyt6mLWeAxyyBS5q9'; // MAX SDK key
-const INTERSTITIAL_AD_UNIT_ID = Platform.select({ android: '081b0dfd806f88e2', ios: '081b0dfd806f88e2', default: '081b0dfd806f88e2' });
-const REWARDED_AD_UNIT_ID     = Platform.select({ android: '2bd4d80c43f5f02e', ios: '2bd4d80c43f5f02e', default: '2bd4d80c43f5f02e' });
-const BANNER_AD_UNIT_ID       = Platform.select({ android: '075282dd35c09d0d', ios: '075282dd35c09d0d', default: '075282dd35c09d0d' });
+const SDK_KEY = '05TMDQ5tZabpXQ45_UTbmEGNUtVAzSTzT6KmWQc5_CuWdzccS4DCITZoL3yIWUG3bbq60QC_d4WF28tUC4gVTF'; // MAX SDK key
+const INTERSTITIAL_AD_UNIT_ID = Platform.select({ android: 'YOUR_AD_UNIT_ID', ios: 'YOUR_AD_UNIT_ID', default: 'YOUR_AD_UNIT_ID' });
+const REWARDED_AD_UNIT_ID     = Platform.select({ android: 'YOUR_AD_UNIT_ID', ios: 'YOUR_AD_UNIT_ID', default: 'YOUR_AD_UNIT_ID' });
+const BANNER_AD_UNIT_ID       = Platform.select({ android: 'YOUR_AD_UNIT_ID', ios: 'YOUR_AD_UNIT_ID', default: 'YOUR_AD_UNIT_ID' });
 
 export default function App() {
   const [initialized, setInitialized] = useState(false);
@@ -61,9 +61,10 @@ export default function App() {
           : AppLovinMAX.loadRewardedAd?.(REWARDED_AD_UNIT_ID);
   };
 
-  const toggleBanner = async () => {
+ const toggleBanner = async () => {
+  try {
     if (!bannerVisible) {
-      await AppLovinMAX.createBanner?.(BANNER_AD_UNIT_ID, 'top_center');
+      await AppLovinMAX.createBanner?.(BANNER_AD_UNIT_ID, 'top_center', true);
       AppLovinMAX.showBanner?.(BANNER_AD_UNIT_ID);
       setBannerVisible(true);
     } else {
@@ -71,7 +72,11 @@ export default function App() {
       AppLovinMAX.destroyBanner?.(BANNER_AD_UNIT_ID);
       setBannerVisible(false);
     }
-  };
+  } catch (e) {
+    console.warn('Banner error:', e);
+  }
+};
+
 
   return (
     <SafeAreaView style={{flex: 1}}>
